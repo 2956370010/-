@@ -1,0 +1,63 @@
+{
+  "project": {
+    "name": "智能火灾报警系统",
+    "role": "角色三：标注与评估负责人",
+    "class_names": ["fire", "smoke"],
+    "image_size": [640, 640],
+    "iou_threshold": 0.5
+  },
+  "preannotation": {
+    "grounding_model": "IDEA-Research/grounding-dino-base",
+    "grounding_model_version": "GroundingDINO-B (Swin-B)",
+    "sam_model": "facebook/sam-vit-huge",
+    "sam_model_version": "SAM ViT-H",
+    "prompts_fire": ["fire", "flame", "burning", "blaze"],
+    "prompts_smoke": ["smoke", "smoke plume", "heavy smoke"],
+    "text_prompt": "fire. flame. burning. blaze. smoke. smoke plume. heavy smoke.",
+    "box_threshold": 0.35,
+    "text_threshold": 0.25,
+    "nms_threshold": 0.7,
+    "input_size": [1280, 1280],
+    "device": "cuda",
+    "batch_size": 1,
+    "postprocessing": "先按 box/text 阈值过滤，再按类别做 NMS；候选框回填原图坐标，SAM 以候选框为 box prompt 输出掩码。",
+    "save_masks": true,
+    "mask_format": "png"
+  },
+  "audit": {
+    "test_set_size": 200,
+    "manual_annotation_seconds_per_image": 90,
+    "review_seconds_per_image_after_auto": 25,
+    "annotators": ["annotator_a", "annotator_b"],
+    "consistency_iou_threshold": 0.5
+  },
+  "comparison": {
+    "test_set_size": 200,
+    "iou_threshold": 0.5,
+    "input_resolution": [640, 640],
+    "conf_threshold_yolo": 0.25,
+    "conf_threshold_open": 0.25,
+    "speed": {
+      "yolo": {
+        "fps": null,
+        "latency_ms": null,
+        "hardware": "待填写：训练机/演示机 GPU 型号",
+        "batch_size": 1,
+        "includes_postprocess": true
+      },
+      "open_domain": {
+        "fps": null,
+        "latency_ms": null,
+        "hardware": "待填写：训练机 GPU 型号",
+        "batch_size": 1,
+        "includes_postprocess": true
+      }
+    }
+  },
+  "segment": {
+    "sample_count": 50,
+    "time_unit": "second",
+    "min_iou_for_success": 0.5,
+    "failure_case_count": 3
+  }
+}

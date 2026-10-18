@@ -1,0 +1,20 @@
+# 数据、图片、权重、视频、日志不入库（任务书约定：Git 只保存代码、配置、文档、清单和小型指标）
+data/*
+!data/README.md
+public_data/
+
+# 大体积与生成物
+*.jpg
+*.jpeg
+*.png
+*.bmp
+*.mp4
+*.avi
+*.pt
+*.onnx
+*.db
+*.log
+
+# Python 缓存
+__pycache__/
+*.pyc

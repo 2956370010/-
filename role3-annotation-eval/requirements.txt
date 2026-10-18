@@ -1,0 +1,7 @@
+# 真实自动预标注运行所需依赖（在训练机环境安装）
+torch
+accelerate
+transformers>=4.44
+pillow
+numpy
+pandas
